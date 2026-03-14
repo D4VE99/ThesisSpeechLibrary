@@ -1,5 +1,4 @@
 # ThesisSpeechLibrary
-libreria js creata ai fini di una ricerca riguarante la prosodia e il miglioramento della speechSynthesis del portoghese europeo sul browser attraverso la web speech api
 PT-Text-Preprocessor 🇵🇹
 Enhancing Portuguese Text-to-Speech (TTS) via Pre-Synthesis Linguistic Processing
 PT-Text-Preprocessor is a lightweight JavaScript library designed to optimize raw text specifically for the Web Speech API. It focuses on improving the prosody, pronunciation, and phonetic accuracy of the Portuguese language during Text-to-Speech synthesis.
