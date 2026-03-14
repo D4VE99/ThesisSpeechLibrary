@@ -13,7 +13,7 @@ export const loadResearchData = async () => {
     try {
         // Cache-busting param to avoid stale CDN responses
         const v = Date.now();
-        const BASE = 'https://raw.githubusercontent.com/D4VE99/ThesisSpeechLibrary/main/';
+        const BASE = 'https://raw.githubusercontent.com/D4VE99/ThesisSpeechLibrary/';
 
 const [vocabRes, punctRes] = await Promise.all([
     fetch(`${BASE}vocabulary-PTEU.json?v=${v}`),
