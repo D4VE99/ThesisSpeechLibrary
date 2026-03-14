@@ -13,10 +13,12 @@ export const loadResearchData = async () => {
     try {
         // Cache-busting param to avoid stale CDN responses
         const v = Date.now();
-        const [vocabRes, punctRes] = await Promise.all([
-            fetch(new URL(`./vocabulary-PTEU.json?v=${v}`, import.meta.url)),
-            fetch(new URL(`./punctuation.json?v=${v}`, import.meta.url))
-        ]);
+        const BASE = 'https://cdn.jsdelivr.net/gh/D4VE99/ThesisSpeechLibrary/';
+
+const [vocabRes, punctRes] = await Promise.all([
+    fetch(`${BASE}vocabulary-PTEU.json?v=${v}`),
+    fetch(`${BASE}punctuation.json?v=${v}`)
+]);
 
         if (!vocabRes.ok) throw new Error(`vocabulary-PTEU.json: HTTP ${vocabRes.status}`);
         if (!punctRes.ok) throw new Error(`punctuation.json: HTTP ${punctRes.status}`);
