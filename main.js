@@ -1,12 +1,31 @@
-// caricamento dati dal vocabulary, dato che sono in json quando si richiama la libreria dovremo usare await però permette di creare vocabolari per ogni lingua senza il bisogno di modificare la libreria ma solo il json
+/**
+ * EP-Speech-Processor Loader
+ * -------------------------------------------------------------------------
+ * Carica i dati del vocabolario PTEU e le regole di punteggiatura
+ * -------------------------------------------------------------------------
+ */
 
-export const getVocabulary = async () => {
+export const loadResearchData = async () => {
     try {
-        // Recupera il JSON dalla stessa cartella su GitHub/jsDelivr
-        const response = await fetch(new URL('./vocabulary.json', import.meta.url));
-        return await response.json();
+        // Caricamento in parallelo per ottimizzare i tempi
+        const [vocabRes, punctRes] = await Promise.all([
+            fetch(new URL('./vocabulary-PTEU.json', import.meta.url)),
+            fetch(new URL('./punctuation.json', import.meta.url))
+        ]);
+
+        if (!vocabRes.ok || !punctRes.ok) {
+            throw new Error("Impossibile recuperare uno dei file JSON.");
+        }
+
+        const vocabulary = await vocabRes.json();
+        const punctuation = await punctRes.json();
+
+        return {
+            vocabulary,
+            punctuation
+        };
     } catch (error) {
-        console.error("Errore nel caricamento del vocabolario:", error);
+        console.error("Errore durante il caricamento della libreria:", error);
         return null;
     }
 };
